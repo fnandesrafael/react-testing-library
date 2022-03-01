@@ -11,13 +11,12 @@ describe('06 - Testa o componente Pokemon.js', () => {
     renderWithRouter(<App />);
 
     pokemons.forEach(({
-      type, name, image, averageWeight: { value, measurementUnit },
+      name, type, image, averageWeight: { value, measurementUnit },
     }) => {
-      expect(screen.getByTestId('pokemon-name')).toHaveTextContent(name);
-      expect(screen.getByTestId('pokemon-type')).toHaveTextContent(type);
-      expect(screen.getByTestId('pokemon-weight')).toHaveTextContent(
-        `Average weight: ${value} ${measurementUnit}`,
-      );
+      expect(screen.getByText(name)).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: type, level: 3 })).toBeInTheDocument();
+      expect(screen.getByText(`Average weight: ${value} ${measurementUnit}`))
+        .toBeInTheDocument();
       expect(screen.getByRole('img', { name: `${name} sprite` }))
         .toHaveAttribute('src', image);
       userEvent.click(screen.getByRole('button', { name: /próximo pokémon/i }));
