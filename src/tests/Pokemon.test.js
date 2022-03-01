@@ -14,7 +14,7 @@ describe('06 - Testa o componente Pokemon.js', () => {
       name, type, image, averageWeight: { value, measurementUnit },
     }) => {
       expect(screen.getByText(name)).toBeInTheDocument();
-      expect(screen.getByText(`Type: ${type}`)).toBeInTheDocument();
+      expect(screen.getAllByText(type)).toHaveLength(2);
       expect(screen.getByText(`Average weight: ${value} ${measurementUnit}`))
         .toBeInTheDocument();
       expect(screen.getByRole('img', { name: `${name} sprite` }))

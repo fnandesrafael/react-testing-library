@@ -30,13 +30,12 @@ describe('05 - Testa o componente Pokédex.js', () => {
   });
   it('Verifica se há somente um card', () => {
     renderWithRouter(<App />);
-    expect(screen.queryAllByTestId('pokemon-card')).toHaveLength(1);
+    expect(screen.getAllByRole('link', { name: /more details/i })).toHaveLength(1);
   });
   it('Verifica se há todos os botões de filtragem', () => {
     renderWithRouter(<App />);
     const TYPE_BTN_LENGHT = 7;
-    const { type } = pokemons;
-    const typeButtons = type;
+    const typeButtons = screen.queryAllByTestId('pokemon-type-button');
     typeButtons.forEach((button) => {
       userEvent.click(button);
       const filteredTypes = pokemons.filter((pokemon) => (
