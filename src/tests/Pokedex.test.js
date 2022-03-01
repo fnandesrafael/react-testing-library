@@ -35,7 +35,8 @@ describe('05 - Testa o componente Pokédex.js', () => {
   it('Verifica se há todos os botões de filtragem', () => {
     renderWithRouter(<App />);
     const TYPE_BTN_LENGHT = 7;
-    const typeButtons = screen.queryAllByTestId('pokemon-type-button');
+    const { type } = pokemons;
+    const typeButtons = type;
     typeButtons.forEach((button) => {
       userEvent.click(button);
       const filteredTypes = pokemons.filter((pokemon) => (
@@ -45,7 +46,6 @@ describe('05 - Testa o componente Pokédex.js', () => {
         expect(screen.getByText(pokemon.name)).toBeInTheDocument();
         userEvent.click(screen.getByRole('button', { name: /próximo pokémon/i }));
       });
-      // console.log(filteredTypes);
       expect(screen.getByRole('button', { name: /all/i })).toBeInTheDocument();
     });
     expect(typeButtons).toHaveLength(TYPE_BTN_LENGHT);

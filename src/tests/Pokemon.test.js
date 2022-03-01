@@ -14,7 +14,7 @@ describe('06 - Testa o componente Pokemon.js', () => {
       name, type, image, averageWeight: { value, measurementUnit },
     }) => {
       expect(screen.getByText(name)).toBeInTheDocument();
-      expect(screen.getByRole('heading', { name: type, level: 3 })).toBeInTheDocument();
+      expect(screen.getByText(`Type: ${type}`)).toBeInTheDocument();
       expect(screen.getByText(`Average weight: ${value} ${measurementUnit}`))
         .toBeInTheDocument();
       expect(screen.getByRole('img', { name: `${name} sprite` }))
@@ -37,8 +37,9 @@ describe('06 - Testa o componente Pokemon.js', () => {
 
     userEvent.click(screen.getByText(/pokémon favoritado\?/i));
     history.push('/');
-    expect(screen.getByTestId('favorite-star')).toHaveAttribute('src', '/star-icon.svg');
-    expect(screen.getByTestId('favorite-star'))
+    expect(screen.getByRole('img', { name: /pikachu is marked as favorite/i }))
+      .toHaveAttribute('src', '/star-icon.svg');
+    expect(screen.getByRole('img', { name: /pikachu is marked as favorite/i }))
       .toHaveAttribute('alt', 'Pikachu is marked as favorite');
   });
 });

@@ -14,7 +14,7 @@ const Pokemon = ({ pokemon, showDetailsLink, isFavorite }) => {
     <div className="pokemon" data-testid="pokemon-card">
       <div className="pokemon-overview">
         <p>{name}</p>
-        <h3>{`${type}`}</h3>
+        <p>{`Type: ${type}`}</p>
         <p>
           Average weight: {value} {measurementUnit}
         </p>
